@@ -1,0 +1,70 @@
+﻿@model _1stream.Models.LoginModel
+
+@{
+    ViewBag.Title = "Log in";
+}
+
+@*<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+</hgroup>*@
+
+<div id="box_login">
+    <div class="container">
+        <div class="span12 box_wrapper">
+            <div class="span12 box">
+                <div>
+                    <div class="head">
+                        <h4>Log in to your account</h4>
+                    </div>
+                    <div class="social">
+                        <a class="face_login" href="#">
+                            <span class="face_icon">
+                                <img src="/Content/themes/measure/img/i_face.png" alt="fb" alt="" />
+                            </span>
+                            <span class="text">Sign in with Facebook</span>
+                        </a>
+                        <div class="division">
+                            <hr class="left">
+                            <span>or</span>
+                            <hr class="right">
+                        </div>
+                    </div>
+                    <div class="form">
+                        @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true)
+
+                            @Html.TextBoxFor(m => m.UserName, new { @placeholder = "Email" })
+                            @Html.ValidationMessageFor(m => m.UserName)
+                                
+                            @Html.PasswordFor(m => m.Password, new { @placeholder = "Password" })
+                            @Html.ValidationMessageFor(m => m.Password)
+                                
+                             <div class="remember">
+                                 <div class="left">
+                                     @Html.CheckBoxFor(m => m.RememberMe)
+                                     @Html.LabelFor(m => m.RememberMe)
+                                 </div>
+                                 <div class="right">
+                                     <a href="reset.html">Forgot password?</a>
+                                 </div>
+                             </div>
+                            <input type="submit" class="btn" value="Log in" />
+                        }
+                    </div>
+                </div>
+            </div>
+            <p class="already">Don't have an account?  @Html.ActionLink("Sign up", "Register")</p>
+        </div>
+    </div>
+</div>
+
+@*<section class="social" id="socialLoginForm">
+    <h2>Use another service to log in.</h2>
+    @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
+</section>*@
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

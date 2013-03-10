@@ -1,0 +1,199 @@
+@model OneStream.Models.Broadcast
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Name)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Name)
+    @Html.ValidationMessageFor(model => model.Name)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Description)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Description)
+    @Html.ValidationMessageFor(model => model.Description)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Type)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Type)
+    @Html.ValidationMessageFor(model => model.Type)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.WatchersCount)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.WatchersCount)
+    @Html.ValidationMessageFor(model => model.WatchersCount)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.ChatEnable)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.ChatEnable)
+    @Html.ValidationMessageFor(model => model.ChatEnable)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.FeedbackBroadcaster)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.FeedbackBroadcaster)
+    @Html.ValidationMessageFor(model => model.FeedbackBroadcaster)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.FeedbackSms)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.FeedbackSms)
+    @Html.ValidationMessageFor(model => model.FeedbackSms)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.FeedbackMail)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.FeedbackMail)
+    @Html.ValidationMessageFor(model => model.FeedbackMail)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.FeedbackCabinet)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.FeedbackCabinet)
+    @Html.ValidationMessageFor(model => model.FeedbackCabinet)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.CustomLogo)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.CustomLogo)
+    @Html.ValidationMessageFor(model => model.CustomLogo)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.FreeStreming)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.FreeStreming)
+    @Html.ValidationMessageFor(model => model.FreeStreming)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.AccessTime)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.AccessTime)
+    @Html.ValidationMessageFor(model => model.AccessTime)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.AnnounceInChannel)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.AnnounceInChannel)
+    @Html.ValidationMessageFor(model => model.AnnounceInChannel)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.StorageTime)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.StorageTime)
+    @Html.ValidationMessageFor(model => model.StorageTime)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.CostOfLive)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.CostOfLive)
+    @Html.ValidationMessageFor(model => model.CostOfLive)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.CostOfStorage)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.CostOfStorage)
+    @Html.ValidationMessageFor(model => model.CostOfStorage)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.CostOfLiveSpecial)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.CostOfLiveSpecial)
+    @Html.ValidationMessageFor(model => model.CostOfLiveSpecial)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.CostOfStorageSpecial)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.CostOfStorageSpecial)
+    @Html.ValidationMessageFor(model => model.CostOfStorageSpecial)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.OffsetStart)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.OffsetStart)
+    @Html.ValidationMessageFor(model => model.OffsetStart)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.OffsetEnd)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.OffsetEnd)
+    @Html.ValidationMessageFor(model => model.OffsetEnd)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.CreatedOn)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.CreatedOn)
+    @Html.ValidationMessageFor(model => model.CreatedOn)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.UpdatedOn)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.UpdatedOn)
+    @Html.ValidationMessageFor(model => model.UpdatedOn)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.StartDate)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.StartDate)
+    @Html.ValidationMessageFor(model => model.StartDate)
+</div>
+
+<div class="editor-label">
+    Channel
+</div>
+<div class="editor-field">
+    @Html.DropDownListFor(model => model.ChannelId, ((IEnumerable<OneStream.Models.Channel>)ViewBag.PossibleChannels).Select(option => new SelectListItem {
+        Text = (option == null ? "None" : option.Name), 
+        Value = option.ChannelId.ToString(),
+        Selected = (Model != null) && (option.ChannelId == Model.ChannelId)
+    }), "Choose...")
+    @Html.ValidationMessageFor(model => model.ChannelId)
+</div>

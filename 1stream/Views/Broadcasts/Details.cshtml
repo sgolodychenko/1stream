@@ -1,0 +1,86 @@
+@model OneStream.Models.Broadcast
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Broadcast</legend>
+
+    <div class="display-label">Channel</div>
+    <div class="display-field">@(Model.Channel == null ? "None" : Model.Channel.Name)</div>
+
+    <div class="display-label">Name</div>
+    <div class="display-field">@Model.Name</div>
+
+    <div class="display-label">Description</div>
+    <div class="display-field">@Model.Description</div>
+
+    <div class="display-label">Type</div>
+    <div class="display-field">@Model.Type</div>
+
+    <div class="display-label">WatchersCount</div>
+    <div class="display-field">@Model.WatchersCount</div>
+
+    <div class="display-label">ChatEnable</div>
+    <div class="display-field">@Model.ChatEnable</div>
+
+    <div class="display-label">FeedbackBroadcaster</div>
+    <div class="display-field">@Model.FeedbackBroadcaster</div>
+
+    <div class="display-label">FeedbackSms</div>
+    <div class="display-field">@Model.FeedbackSms</div>
+
+    <div class="display-label">FeedbackMail</div>
+    <div class="display-field">@Model.FeedbackMail</div>
+
+    <div class="display-label">FeedbackCabinet</div>
+    <div class="display-field">@Model.FeedbackCabinet</div>
+
+    <div class="display-label">CustomLogo</div>
+    <div class="display-field">@Model.CustomLogo</div>
+
+    <div class="display-label">FreeStreming</div>
+    <div class="display-field">@Model.FreeStreming</div>
+
+    <div class="display-label">AccessTime</div>
+    <div class="display-field">@Model.AccessTime</div>
+
+    <div class="display-label">AnnounceInChannel</div>
+    <div class="display-field">@Model.AnnounceInChannel</div>
+
+    <div class="display-label">StorageTime</div>
+    <div class="display-field">@Model.StorageTime</div>
+
+    <div class="display-label">CostOfLive</div>
+    <div class="display-field">@String.Format("{0:F}", Model.CostOfLive)</div>
+
+    <div class="display-label">CostOfStorage</div>
+    <div class="display-field">@String.Format("{0:F}", Model.CostOfStorage)</div>
+
+    <div class="display-label">CostOfLiveSpecial</div>
+    <div class="display-field">@String.Format("{0:F}", Model.CostOfLiveSpecial)</div>
+
+    <div class="display-label">CostOfStorageSpecial</div>
+    <div class="display-field">@String.Format("{0:F}", Model.CostOfStorageSpecial)</div>
+
+    <div class="display-label">OffsetStart</div>
+    <div class="display-field">@Model.OffsetStart</div>
+
+    <div class="display-label">OffsetEnd</div>
+    <div class="display-field">@Model.OffsetEnd</div>
+
+    <div class="display-label">CreatedOn</div>
+    <div class="display-field">@String.Format("{0:g}", Model.CreatedOn)</div>
+
+    <div class="display-label">UpdatedOn</div>
+    <div class="display-field">@String.Format("{0:g}", Model.UpdatedOn)</div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.BroadcastId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

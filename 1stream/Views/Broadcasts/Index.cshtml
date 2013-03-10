@@ -1,0 +1,47 @@
+@model IEnumerable<OneStream.Models.Broadcast>
+
+@{
+    ViewBag.Title = "Events";
+}
+
+<div id="blog_wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="span8">
+                <h1 class="header">@ViewBag.Title<hr>
+                </h1>
+                @Html.ActionLink("Create New", "Create", null, new { @class = "btn" })
+                @foreach (var item in Model)
+                {
+                    <div class="post">
+                        <div class="row">
+                            <div class="span3">
+                                <a href="blog-post.html">
+                                    <img class="main_pic" alt="main pic" src="@Url.Content("~/Content/themes/measure/img/pic_blog.png")" />
+                                </a>
+                            </div>
+                            <div class="span4 info">
+                                <a href="@Url.Action("Details", "Broadcasts", new { id = item.BroadcastId })">
+                                    <h3>@item.Name</h3>
+                                </a>
+                                <p>@item.Description</p>
+                                <div class="post_info">
+                                    <div class="author">
+                                        @item.Channel.UserProfile.UserName
+
+                                    </div>
+                                    <div class="date">
+                                        @item.StartDate
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @Html.ActionLink("Edit", "Edit", "Broadcasts", new { id = item.BroadcastId }, new {@class="btn"})
+                        @*<a href="blog-post.html" class="btn">more</a>*@
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

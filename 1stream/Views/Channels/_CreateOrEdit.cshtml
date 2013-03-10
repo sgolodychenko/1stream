@@ -1,0 +1,111 @@
+@model OneStream.Models.Channel
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+<div class="editor-field">
+    @Html.HiddenFor(model => model.UserId)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Name)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Name)
+    @Html.ValidationMessageFor(model => model.Name)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Description)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Description)
+    @Html.ValidationMessageFor(model => model.Description)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.CostOfLive)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.CostOfLive)
+    @Html.ValidationMessageFor(model => model.CostOfLive)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.CostOfStorage)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.CostOfStorage)
+    @Html.ValidationMessageFor(model => model.CostOfStorage)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Status)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Status)
+    @Html.ValidationMessageFor(model => model.Status)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.WatchersCount)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.WatchersCount)
+    @Html.ValidationMessageFor(model => model.WatchersCount)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.ChatEnable)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.ChatEnable)
+    @Html.ValidationMessageFor(model => model.ChatEnable)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.FeedbackBroadcaster)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.FeedbackBroadcaster)
+    @Html.ValidationMessageFor(model => model.FeedbackBroadcaster)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.FeedbackSms)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.FeedbackSms)
+    @Html.ValidationMessageFor(model => model.FeedbackSms)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.FeedbackMail)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.FeedbackMail)
+    @Html.ValidationMessageFor(model => model.FeedbackMail)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.FeedbackCabinet)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.FeedbackCabinet)
+    @Html.ValidationMessageFor(model => model.FeedbackCabinet)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.CustomLogo)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.CustomLogo)
+    @Html.ValidationMessageFor(model => model.CustomLogo)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.FreeStreming)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.FreeStreming)
+    @Html.ValidationMessageFor(model => model.FreeStreming)
+</div>

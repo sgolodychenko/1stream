@@ -1,0 +1,35 @@
+@model IEnumerable<OneStream.Models.Channel>
+
+@{
+    ViewBag.Title = "Channels";
+}
+<div id="portfolio" class="portfolio_page">
+    <div class="container">
+        <!-- header -->
+        <h2 class="section_header left">
+            <span>@ViewBag.Title
+                <small></small>
+            </span>
+            <hr class="right visible-desktop">
+        </h2>
+        <p>
+            @Html.ActionLink("Create New", "Create", null, new {@class="btn"})
+        </p>
+
+        @{
+            var grid = new WebGrid(Model, defaultSort: "Name");
+        }
+        @grid.GetHtml(columns: grid.Columns(
+                        grid.Column("Name"),
+                        grid.Column("Description"),
+                        grid.Column("Status"),
+                        grid.Column("CostOfLive"),
+                        grid.Column("CostOfStorage"),
+                        grid.Column(header: "Actions", format: (item) => 
+                            new HtmlString(
+                                Html.ActionLink("Edit", "Edit", new { id = item.ChannelId } ).ToString() + " | " +
+                                Html.ActionLink("Delete", "Delete", new { id = item.ChannelId } ))
+                            )
+                        ))
+    </div>
+</div>

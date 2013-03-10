@@ -1,0 +1,32 @@
+@model OneStream.Models.Channel
+
+@{
+    ViewBag.Title = "Edit Channel";
+}
+
+<div id="box_edit">
+    <div class="container">
+        <div class="span12 box_wrapper">
+            <div class="span12 box">
+                <div>
+                    <div class="head">
+                        <h4>@ViewBag.Title</h4>
+                    </div>
+                    <div>
+                        @Html.ActionLink("Back to List", "Index", null, new {@class="btn"})
+                    </div>
+                    <div class="form">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.ValidationSummary(true)
+                        @Html.HiddenFor(model => model.ChannelId)
+                        @Html.Partial("_CreateOrEdit", Model)
+
+                        <input type="submit" value="Save" class="btn" />
+                    }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
