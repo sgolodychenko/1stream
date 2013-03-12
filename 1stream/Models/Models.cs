@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 using OneStream.App_LocalResources;
 using _1stream.Models;
 
@@ -18,9 +19,11 @@ namespace OneStream.Models
         public virtual int UserId { get; set; }
         [ForeignKey("UserId")]
         public virtual UserProfile UserProfile { get; set; }
+
+        public virtual ICollection<Broadcast> Broadcasts { get; set; }
         
         [Required]
-        [Display(ResourceType = typeof (ModelsResources_en), Name = "Channel_Name")]
+        //[Display(ResourceType = typeof (ModelsResources_en), Name = "Channel_Name")]
         public string Name { get; set; }
         public string Description { get; set; }
         public string Status { get; set; }
@@ -103,5 +106,14 @@ namespace OneStream.Models
 
         public DateTime? CreatedOn { get; set; }
         public DateTime? UpdatedOn { get; set; }
+    }
+
+    public class PersonalCabinet
+    {
+        public int UserId { get; set; }
+        public Broadcast CurrentBroadcast { get; set; }
+        public IQueryable<Broadcast> MonthBroadcasts { get; set; }
+        public IQueryable<Broadcast> PlannedBroadcasts { get; set; }
+        public IQueryable<Broadcast> ArchivedBroadcasts { get; set; }
     }
 }

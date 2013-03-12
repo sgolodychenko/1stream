@@ -1,0 +1,18 @@
+@model OneStream.Models.UserInfo
+
+@{
+    ViewBag.Title = "UserInfo";
+}
+
+@using (Html.BeginForm("Create", "UserInfoes")) {
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>@ViewBag.Title</legend>
+
+		@Html.Partial("_CreateOrEdit", Model)
+
+        <p>
+            <input type="submit" value="Save" class="btn"/>
+        </p>
+    </fieldset>
+}

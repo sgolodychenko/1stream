@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Web.Security;
 using DotNetOpenAuth.AspNet;
 using Microsoft.Web.WebPages.OAuth;
+using OneStream.Models;
 using WebMatrix.WebData;
 using _1stream.Filters;
 using _1stream.Models;
@@ -208,7 +209,7 @@ namespace _1stream.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
-
+        
         //
         // POST: /Account/ExternalLogin
 

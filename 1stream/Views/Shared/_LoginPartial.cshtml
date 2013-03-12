@@ -3,6 +3,12 @@
     <a href="#" class="dropdown-toggle" data-toggle="dropdown">@User.Identity.Name <b class="caret"></b></a>
     <ul class="dropdown-menu">
         <li>
+            @Html.ActionLink("Personal Cabinet", "Index", "Cabinet")
+        </li>
+        <li>
+            @Html.ActionLink("User Details", "Details", "UserInfoes")
+        </li>
+        <li>
             @Html.ActionLink("Manage Account", "Manage", "Account")
         </li>
         <li>

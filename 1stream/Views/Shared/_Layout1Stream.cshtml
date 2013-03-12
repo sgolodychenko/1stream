@@ -13,7 +13,7 @@
     @Html.Partial("_html5shiv")
     @* favicons and touch icons go here *@
 </head>
-<body>
+@*<body>*@
     <a href="#" class="scrolltop">
         <span>up</span>
     </a>
@@ -31,7 +31,7 @@
                 </a>
                 <div class="nav-collapse collapse">
                     <ul class="nav pull-right">
-                            @Html.Navigation()
+                            @Html.Navigation(User.Identity.IsAuthenticated)
                         <li class="dropdown">
                              @Html.Partial("_LoginPartial")
                         </li>

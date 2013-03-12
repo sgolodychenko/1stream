@@ -8,9 +8,16 @@ namespace NavigationRoutes
 {
     public class NavigationRouteFilter : INavigationRouteFilter
     {
+        private List<string> _Names = new List<string>();
+
+        public List<string> RouteNames
+        {
+            get { return _Names; } 
+        }
+
         public bool ShouldRemove(Route route)
         {
-            return true;
+            return _Names.Any(name => route.Url.StartsWith(name.ToLower()));
         }
     }
 }

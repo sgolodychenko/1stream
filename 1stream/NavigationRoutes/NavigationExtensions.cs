@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
+using OneStream.Controllers;
 
 namespace NavigationRoutes
 {
@@ -32,9 +33,18 @@ namespace NavigationRoutes
     public static class NavigationViewExtensions
     {
         
-        public static IHtmlString Navigation(this HtmlHelper helper)
+        public static IHtmlString Navigation(this HtmlHelper helper, bool isAuthorized)
         {
-            NavigationRoutes.Filters.Add();
+            NavigationRoutes.Filters.Clear();
+
+            var filter = new NavigationRouteFilter();
+            if (!isAuthorized)
+            {
+                filter.RouteNames.Add("channel");
+                filter.RouteNames.Add("broadcast");
+            }
+
+            NavigationRoutes.Filters.Add(filter);
             return new CompositeMvcHtmlString(
                 GetRoutesForCurrentRequest(RouteTable.Routes,NavigationRoutes.Filters).Select(namedRoute => helper.NavigationListItemRouteLink(namedRoute)));
         }

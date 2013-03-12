@@ -1,0 +1,32 @@
+﻿@model OneStream.Models.PersonalCabinet
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout1Stream.cshtml";
+}
+
+<fieldset>
+    <legend>PersonalCabinet</legend>
+    <div id="comingsoon" class="comingsoon_page">
+        <div class="container">
+            <div class="countdown">
+                <div class="row">
+                    <div class="span10 right">
+                        @for (DateTime date = DateTime.Now.AddDays(-2); date.Date <= DateTime.Now.AddMonths(1); date = date.AddDays(1))
+                        {
+                            var cssClass = string.Empty;
+                            //if (Model.MonthBroadcasts.Count(b => b.StartDate.DayOfYear.Equals(date)) > 0)
+                            //{cssClass = "blue";}
+                            <div class="figure">
+                                <div class="square @cssClass">
+                                    <span>@date.Day</span>
+                                </div>
+                                <label>@date.DayOfWeek</label>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</fieldset>

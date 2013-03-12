@@ -1,9 +1,5 @@
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using OneStream.Models;
 using WebMatrix.WebData;
@@ -17,6 +13,7 @@ namespace OneStream.Controllers
         //
         // GET: /Channels/
 
+        [Authorize]
         public ViewResult Index()
         {
             return View(context.Channels.ToList());
@@ -25,6 +22,7 @@ namespace OneStream.Controllers
         //
         // GET: /Channels/Details/5
 
+        [Authorize]
         public ViewResult Details(int id)
         {
             Channel channel = context.Channels.Single(x => x.ChannelId == id);
@@ -33,7 +31,8 @@ namespace OneStream.Controllers
 
         //
         // GET: /Channels/Create
-
+        
+        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -43,6 +42,7 @@ namespace OneStream.Controllers
         // POST: /Channels/Create
 
         [HttpPost]
+        [Authorize]
         public ActionResult Create(Channel channel)
         {
             ModelState.Clear();
@@ -61,7 +61,8 @@ namespace OneStream.Controllers
         
         //
         // GET: /Channels/Edit/5
- 
+
+        [Authorize]
         public ActionResult Edit(int id)
         {
             Channel channel = context.Channels.Single(x => x.ChannelId == id);
@@ -72,6 +73,7 @@ namespace OneStream.Controllers
         // POST: /Channels/Edit/5
 
         [HttpPost]
+        [Authorize]
         public ActionResult Edit(Channel channel)
         {
             if (ModelState.IsValid)
@@ -95,6 +97,7 @@ namespace OneStream.Controllers
         //
         // POST: /Channels/Delete/5
 
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
