@@ -1,0 +1,37 @@
+﻿@model DateTime?
+
+@{
+    string name = ViewData.TemplateInfo.HtmlFieldPrefix + "_datetime";
+    string id = name.Replace(".", "_");
+}
+
+<div id="@id" class="input-append">
+    @if (Model.HasValue)
+    {
+        <input data-format="MM/dd/yyyy HH:mm:ss PP" type="text" readonly="readonly" value="@Model.Value"/>
+    }
+    else
+    {
+        <input data-format="MM/dd/yyyy HH:mm:ss PP" type="text" readonly="readonly" value="@DateTime.Now"/>
+    }
+    <span class="add-on">
+        <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+    </span>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#@id").datetimepicker
+            ({
+                //dateFormat: 'dd/mm/yy',
+                showStatus: true,
+                showWeeks: true,
+                highlightWeek: true,
+                numberOfMonths: 1,
+                showAnim: "scale",
+                showOptions: {
+                    origin: ["top", "left"]
+                }
+            });
+    });
+</script>

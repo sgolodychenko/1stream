@@ -13,7 +13,9 @@ namespace BootstrapSupport
                 "~/Scripts/jquery-migrate-{version}.js",
                 "~/Scripts/bootstrap.js",
                 "~/Scripts/jquery.validate.js",
-                "~/scripts/jquery.validate.unobtrusive.js",
+                "~/Scripts/jquery.validate.unobtrusive.js",
+                "~/Scripts/bootstrap-datepicker.js",
+                "~/Scripts/bootstrap-datetimepicker.js",
                 "~/Scripts/jquery.validate.unobtrusive-custom-for-bootstrap.js"
                 ));
 
@@ -25,7 +27,9 @@ namespace BootstrapSupport
             //));
 
             bundles.Add(new StyleBundle("~/content/css").Include(
-                "~/Content/themes/measure/css/*.css"
+                "~/Content/themes/measure/css/*.css",
+                "~/Content/bootstrap-datepicker*",
+                "~/Content/bootstrap-datetimepicker*"
                 ));
 
             //bundles.Add(new StyleBundle("~/content/css").Include(

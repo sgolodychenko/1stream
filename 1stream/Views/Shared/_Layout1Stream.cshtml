@@ -9,11 +9,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @*<link href="@Styles.Url("~/content/css")" rel="stylesheet"/>*@
     @Styles.Render("~/Content/css")
+    @Scripts.Render("~/js")
     @RenderSection("head", required: false)
     @Html.Partial("_html5shiv")
     @* favicons and touch icons go here *@
 </head>
-@*<body>*@
+<body>
     <a href="#" class="scrolltop">
         <span>up</span>
     </a>
@@ -49,29 +50,30 @@
     
     <!-- starts footer -->
     <footer>
-    <div id="footer">
-        <div class="container">
-            <div class="row copyright">
-                <div class="span5">
-                    <h3>Social</h3>
-                    <a href="#" class="social fb">
-                        <i class="i_facebook"></i>
-                    </a>
-                    <a href="#" class="social tw">
-                        <i class="i_twitter"></i>
-                    </a>
-                    <a href="#" class="social yt">
-                        <i class="i_youtube"></i>
-                    </a>
-                </div>
-                <div class="span2 offset5 copy">
-                    <p>2013 - 1Stream</p>
+        <div id="footer">
+            <div class="container">
+                <div class="row copyright">
+                    <div class="span5">
+                        <h3>Social</h3>
+                        <a href="#" class="social fb">
+                            <i class="i_facebook"></i>
+                        </a>
+                        <a href="#" class="social tw">
+                            <i class="i_twitter"></i>
+                        </a>
+                        <a href="#" class="social yt">
+                            <i class="i_youtube"></i>
+                        </a>
+                    </div>
+                    <div class="span2 offset5 copy">
+                        <p>2013 - 1Stream</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-        </footer>
-    @Scripts.Render("~/js")
+    </footer>
+
+    
     @RenderSection("Scripts", required: false)
 </body>
 </html>
