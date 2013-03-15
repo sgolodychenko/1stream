@@ -5,11 +5,11 @@ using System.Text;
 
 namespace OneStream.Models
 {
-    //public class BaseModel
-    //{
-    //    public DateTime? CreatedOn { get; set; }
-    //    public DateTime? UpdatedOn { get; set; }
-    //}
+    public class BaseModel
+    {
+        public DateTime? CreatedOn { get; set; }
+        public DateTime? UpdatedOn { get; set; }
+    }
 
     //public interface IBaseModel
     //{

@@ -1,15 +1,12 @@
 @model OneStream.Models.Broadcast
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Edit Broadcast";
 }
-
-<h2>Edit</h2>
-
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
     <fieldset>
-        <legend>Broadcast</legend>
+        <legend>@ViewBag.Title</legend>
 
         @Html.HiddenFor(model => model.BroadcastId)
 		@Html.Partial("_CreateOrEdit", Model)

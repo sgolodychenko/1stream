@@ -14,7 +14,7 @@ namespace BootstrapSupport
                 "~/Scripts/bootstrap.js",
                 "~/Scripts/jquery.validate.js",
                 "~/Scripts/jquery.validate.unobtrusive.js",
-                "~/Scripts/bootstrap-datepicker.js",
+                //"~/Scripts/bootstrap-datepicker.js",
                 "~/Scripts/bootstrap-datetimepicker.js",
                 "~/Scripts/jquery.validate.unobtrusive-custom-for-bootstrap.js"
                 ));
@@ -28,7 +28,7 @@ namespace BootstrapSupport
 
             bundles.Add(new StyleBundle("~/content/css").Include(
                 "~/Content/themes/measure/css/*.css",
-                "~/Content/bootstrap-datepicker*",
+                //"~/Content/bootstrap-datepicker*",
                 "~/Content/bootstrap-datetimepicker*"
                 ));
 

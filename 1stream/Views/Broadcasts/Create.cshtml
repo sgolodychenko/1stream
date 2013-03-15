@@ -1,18 +1,13 @@
 @model OneStream.Models.Broadcast
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Create Broadcast";
 }
-
-<h2>Create</h2>
-
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
     <fieldset>
-        <legend>Broadcast</legend>
-
-		@Html.Partial("_CreateOrEdit", Model)
-
+        <legend>@ViewBag.Title</legend>
+        @Html.Partial("_CreateOrEdit", Model)
         <p>
             <input type="submit" value="Create" />
         </p>

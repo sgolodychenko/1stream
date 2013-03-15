@@ -1,71 +1,35 @@
 @model IEnumerable<OneStream.Models.UserInfo>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Users List";
 }
 
-<h2>Index</h2>
+<div id="portfolio" class="portfolio_page">
+    <div class="container">
+        <!-- header -->
+        <h2 class="section_header left">
+            <span>@ViewBag.Title
+                <small></small>
+            </span>
+            <hr class="right visible-desktop">
+        </h2>
+        <p>
+            @Html.ActionLink("Create New", "Create", null, new {@class="btn"})
+        </p>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table>
-    <tr>
-        <th></th>
-        <th>
-            UserProfile
-        </th>
-        <th>
-            FirstName
-        </th>
-        <th>
-            LastName
-        </th>
-        <th>
-            Email
-        </th>
-        <th>
-            Balance
-        </th>
-        <th>
-            CreatedOn
-        </th>
-        <th>
-            UpdatedOn
-        </th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.UserId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.UserId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.UserId })
-        </td>
-        <td>
-			@Html.DisplayTextFor(_ => item.UserProfile).ToString()
-        </td>
-        <td>
-			@item.FirstName
-        </td>
-        <td>
-			@item.LastName
-        </td>
-        <td>
-			@item.Email
-        </td>
-        <td>
-			@String.Format("{0:F}", item.Balance)
-        </td>
-        <td>
-			@String.Format("{0:g}", item.CreatedOn)
-        </td>
-        <td>
-			@String.Format("{0:g}", item.UpdatedOn)
-        </td>
-    </tr>
-}
-
-</table>
-
-
+        @{
+            var grid = new WebGrid(Model, defaultSort: "FirstName");
+        }
+        @grid.GetHtml(columns: grid.Columns(
+                        grid.Column("FirstName"),
+                        grid.Column("LastName"),
+                        grid.Column("Email"),
+                        grid.Column("Balance"),
+                        grid.Column(header: "Actions", format: (item) => 
+                            new HtmlString(
+                                Html.ActionLink("Edit", "Edit", new { id = item.UserId } ).ToString() + " | " +
+                                Html.ActionLink("Delete", "Delete", new { id = item.UserId } ))
+                            )
+                        ))
+    </div>
+</div>

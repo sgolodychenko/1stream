@@ -17,7 +17,7 @@ namespace NavigationRoutes
 
         public bool ShouldRemove(Route route)
         {
-            return _Names.Any(name => route.Url.StartsWith(name.ToLower()));
+            return _Names.Any(name => route.Url.Equals(name.ToLower()));
         }
     }
 }

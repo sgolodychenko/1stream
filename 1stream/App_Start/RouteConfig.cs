@@ -29,8 +29,15 @@ namespace OneStream.App_Start
             //      .AddChildRoute<HomeController>("About", c => c.About())
             //      ;
 
+            //routes.MapNavigationRoute<HomeController>("Manage", c => c.Index())
+            //      .AddChildRoute<ChannelsController>("Channels", c => c.Index())
+            //      .AddChildRoute<BroadcastsController>("Broadcasts", c => c.Index());
+            
+            routes.MapNavigationRoute<BroadcastsController>("My Broadcasts", c => c.IndexMy());
+
             routes.MapNavigationRoute<ChannelsController>("Channels", c => c.Index());
             routes.MapNavigationRoute<BroadcastsController>("Broadcasts", c => c.Index());
+            routes.MapNavigationRoute<UserInfoesController>("Users", c => c.Index());
         }
     }
 }

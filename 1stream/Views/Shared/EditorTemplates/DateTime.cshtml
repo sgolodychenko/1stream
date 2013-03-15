@@ -1,19 +1,18 @@
-﻿@model DateTime?
+﻿@using System.Globalization
+@using OneStream.Models
+@model DateTime?
 
 @{
-    string name = ViewData.TemplateInfo.HtmlFieldPrefix + "_datetime";
-    string id = name.Replace(".", "_");
+    string name = ViewData.TemplateInfo.HtmlFieldPrefix;
+    string id = name + "_field";
 }
 
 <div id="@id" class="input-append">
-    @if (Model.HasValue)
-    {
-        <input data-format="MM/dd/yyyy HH:mm:ss PP" type="text" readonly="readonly" value="@Model.Value"/>
-    }
-    else
-    {
-        <input data-format="MM/dd/yyyy HH:mm:ss PP" type="text" readonly="readonly" value="@DateTime.Now"/>
-    }
+    @{
+        DateTime date = Model.HasValue ? Model.Value : DateTime.Now;
+     } 
+    <input name="@name" data-format="@Constants.DateTimeFormat" type="text" readonly="readonly" value="@date.ToString(@Constants.DateTimeFormat)"/>
+
     <span class="add-on">
         <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
     </span>
@@ -23,7 +22,6 @@
     $(document).ready(function () {
         $("#@id").datetimepicker
             ({
-                //dateFormat: 'dd/mm/yy',
                 showStatus: true,
                 showWeeks: true,
                 highlightWeek: true,

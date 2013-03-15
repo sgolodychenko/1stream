@@ -1,4 +1,5 @@
-﻿using Microsoft.Web.Mvc;
+﻿using System.Web.Security;
+using Microsoft.Web.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,7 @@ using System.Web.Mvc;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
 using OneStream.Controllers;
+using OneStream.Models;
 
 namespace NavigationRoutes
 {
@@ -40,8 +42,30 @@ namespace NavigationRoutes
             var filter = new NavigationRouteFilter();
             if (!isAuthorized)
             {
-                filter.RouteNames.Add("channel");
-                filter.RouteNames.Add("broadcast");
+                filter.RouteNames.Add("channels/index");
+                filter.RouteNames.Add("broadcasts/index");
+                filter.RouteNames.Add("userinfoes/index");
+                filter.RouteNames.Add("broadcasts/indexmy");
+            }
+            else
+            {
+                if (Roles.IsUserInRole(UserRole.Admin))
+                {
+
+                }
+                else if (Roles.IsUserInRole(UserRole.User))
+                {
+                    filter.RouteNames.Add("channels/index");
+                    filter.RouteNames.Add("broadcasts/index");
+                    filter.RouteNames.Add("userinfoes/index");
+                }
+                else
+                {
+                    filter.RouteNames.Add("channels/index");
+                    filter.RouteNames.Add("broadcasts/index");
+                    filter.RouteNames.Add("broadcasts/indexmy");
+                    filter.RouteNames.Add("userinfoes/index");
+                }
             }
 
             NavigationRoutes.Filters.Add(filter);

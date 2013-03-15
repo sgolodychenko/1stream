@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using OneStream.Models;
 using WebMatrix.WebData;
 using _1stream.Filters;
@@ -13,17 +14,24 @@ namespace OneStream.Controllers
 {
     [Authorize]
     [InitializeSimpleMembership]
-    public class BroadcastsController : Controller
+    public class BroadcastsController : BaseController
     {
-        private OneStreamContext context = new OneStreamContext();
-
         //
         // GET: /Broadcasts/
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public ViewResult Index()
         {
-            return View(context.Broadcasts.Include(broadcast => broadcast.Channel).ToList());
+            return View(Context.Broadcasts.Include(broadcast => broadcast.Channel).ToList());
+        }
+
+        [Authorize]
+        public ViewResult IndexMy()
+        {
+            var userId = WebSecurity.GetUserId(User.Identity.Name);
+            var broadcasts =
+                Context.Broadcasts.Include(broadcast => broadcast.Channel).Where(b => b.Channel.UserId == userId);
+            return View("Index", broadcasts.ToList());
         }
 
         //
@@ -32,7 +40,7 @@ namespace OneStream.Controllers
         [Authorize]
         public ViewResult Details(int id)
         {
-            Broadcast broadcast = context.Broadcasts.Single(x => x.BroadcastId == id);
+            Broadcast broadcast = Context.Broadcasts.Single(x => x.BroadcastId == id);
             return View(broadcast);
         }
 
@@ -42,8 +50,13 @@ namespace OneStream.Controllers
         [Authorize]
         public ActionResult Create()
         {
-            ViewBag.PossibleChannels = context.Channels;
-            var channel = context.Channels.FirstOrDefault(c => c.UserId == WebSecurity.CurrentUserId);
+            var userId = WebSecurity.GetUserId(User.Identity.Name);
+            ViewBag.PossibleChannels = Context.Channels.Where(c=> c.UserId == userId).ToList();
+            var channel = Context.Channels.FirstOrDefault(c => c.UserId == WebSecurity.CurrentUserId);
+            if (channel == null)
+            {
+                return RedirectToAction("Create", "Channels");
+            }
             var broadcast = new Broadcast()
                 {
                     CostOfLive = channel.CostOfLive,
@@ -69,7 +82,7 @@ namespace OneStream.Controllers
         public ActionResult Create(Broadcast broadcast)
         {
             ModelState.Clear();
-            broadcast.StartDate = DateTime.Now;
+            broadcast.StartDate = broadcast.StartDate.ToUniversalTime();
             broadcast.CreatedOn = DateTime.Now;
             broadcast.UpdatedOn = DateTime.Now;
 
@@ -77,12 +90,13 @@ namespace OneStream.Controllers
 
             if (ModelState.IsValid)
             {
-                context.Broadcasts.Add(broadcast);
-                context.SaveChanges();
-                return RedirectToAction("Index");  
+                Context.Broadcasts.Add(broadcast);
+                Context.SaveChanges();
+                return Roles.IsUserInRole(UserRole.Admin) ? RedirectToAction("Index") : RedirectToAction("IndexMy");
             }
 
-            ViewBag.PossibleChannels = context.Channels;
+            var userId = WebSecurity.GetUserId(User.Identity.Name);
+            ViewBag.PossibleChannels = Context.Channels.Where(c => c.UserId == userId).ToList();
             return View(broadcast);
         }
         
@@ -92,8 +106,9 @@ namespace OneStream.Controllers
         [Authorize]
         public ActionResult Edit(int id)
         {
-            Broadcast broadcast = context.Broadcasts.Single(x => x.BroadcastId == id);
-            ViewBag.PossibleChannels = context.Channels;
+            Broadcast broadcast = Context.Broadcasts.Single(x => x.BroadcastId == id);
+            var userId = WebSecurity.GetUserId(User.Identity.Name);
+            ViewBag.PossibleChannels = Context.Channels.Where(c => c.UserId == userId).ToList();
             return View(broadcast);
         }
 
@@ -108,11 +123,12 @@ namespace OneStream.Controllers
 
             if (ModelState.IsValid)
             {
-                context.Entry(broadcast).State = EntityState.Modified;
-                context.SaveChanges();
-                return RedirectToAction("Index");
+                Context.Entry(broadcast).State = EntityState.Modified;
+                Context.SaveChanges();
+                return Roles.IsUserInRole(UserRole.Admin) ? RedirectToAction("Index") : RedirectToAction("IndexMy");
             }
-            ViewBag.PossibleChannels = context.Channels;
+            var userId = WebSecurity.GetUserId(User.Identity.Name);
+            ViewBag.PossibleChannels = Context.Channels.Where(c => c.UserId == userId).ToList();
             return View(broadcast);
         }
 
@@ -122,7 +138,7 @@ namespace OneStream.Controllers
         [Authorize]
         public ActionResult Delete(int id)
         {
-            Broadcast broadcast = context.Broadcasts.Single(x => x.BroadcastId == id);
+            Broadcast broadcast = Context.Broadcasts.Single(x => x.BroadcastId == id);
             return View(broadcast);
         }
 
@@ -133,16 +149,16 @@ namespace OneStream.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            Broadcast broadcast = context.Broadcasts.Single(x => x.BroadcastId == id);
-            context.Broadcasts.Remove(broadcast);
-            context.SaveChanges();
+            Broadcast broadcast = Context.Broadcasts.Single(x => x.BroadcastId == id);
+            Context.Broadcasts.Remove(broadcast);
+            Context.SaveChanges();
             return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing) {
-                context.Dispose();
+                Context.Dispose();
             }
             base.Dispose(disposing);
         }

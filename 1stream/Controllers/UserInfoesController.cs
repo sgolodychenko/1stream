@@ -1,9 +1,5 @@
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using OneStream.Models;
 using WebMatrix.WebData;
@@ -13,24 +9,22 @@ namespace OneStream.Controllers
 {
     [Authorize]
     [InitializeSimpleMembership]
-    public class UserInfoesController : Controller
+    public class UserInfoesController : BaseController
     {
-        private OneStreamContext context = new OneStreamContext();
-
         //
         // GET: /UserInfoes/
 
         public ViewResult Index()
         {
-            return View(context.UserInfoes.ToList());
+            return View(Context.UserInfoes.ToList());
         }
 
         //
         // GET: /UserInfoes/Details/5
 
-        public ViewResult Details()
+        public ViewResult Details(int id)
         {
-            var userInfo = context.UserInfoes.FirstOrDefault(x => x.UserId == WebSecurity.CurrentUserId);
+            var userInfo = Context.UserInfoes.FirstOrDefault(x => x.UserId == id);
             if (userInfo == null)
                 return View("Create");
             return View(userInfo);
@@ -53,8 +47,8 @@ namespace OneStream.Controllers
             if (ModelState.IsValid)
             {
                 userinfo.UserId = WebSecurity.CurrentUserId;
-                context.UserInfoes.Add(userinfo);
-                context.SaveChanges();
+                Context.UserInfoes.Add(userinfo);
+                Context.SaveChanges();
                 return View("Details", userinfo);
             }
 
@@ -66,7 +60,7 @@ namespace OneStream.Controllers
 
         public ActionResult Edit(int id)
         {
-            var userinfo = context.UserInfoes.FirstOrDefault(x => x.UserId == id) ?? new UserInfo { UserId = id };
+            var userinfo = Context.UserInfoes.FirstOrDefault(x => x.UserId == id) ?? new UserInfo { UserId = id };
             return View(userinfo);
         }
 
@@ -78,9 +72,11 @@ namespace OneStream.Controllers
         {
             if (ModelState.IsValid)
             {
-                context.Entry(userinfo).State = EntityState.Modified;
+                //Context.Entry(userinfo).State = EntityState.Modified;
+                var curUserInfo = Context.UserInfoes.Find(userinfo.UserId);
+                Context.Entry(curUserInfo).CurrentValues.SetValues(userinfo);
 
-                context.SaveChanges();
+                Context.SaveChanges();
                 return RedirectToAction("Details", new {id = userinfo.UserId});
             }
             return View(userinfo);
@@ -91,7 +87,7 @@ namespace OneStream.Controllers
 
         public ActionResult Delete(int id)
         {
-            UserInfo userinfo = context.UserInfoes.Single(x => x.UserId == id);
+            UserInfo userinfo = Context.UserInfoes.Single(x => x.UserId == id);
             return View(userinfo);
         }
 
@@ -101,9 +97,9 @@ namespace OneStream.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            UserInfo userinfo = context.UserInfoes.Single(x => x.UserId == id);
-            context.UserInfoes.Remove(userinfo);
-            context.SaveChanges();
+            UserInfo userinfo = Context.UserInfoes.Single(x => x.UserId == id);
+            Context.UserInfoes.Remove(userinfo);
+            Context.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -111,7 +107,7 @@ namespace OneStream.Controllers
         {
             if (disposing)
             {
-                context.Dispose();
+                Context.Dispose();
             }
             base.Dispose(disposing);
         }

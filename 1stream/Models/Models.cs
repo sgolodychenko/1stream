@@ -9,7 +9,7 @@ using _1stream.Models;
 namespace OneStream.Models
 {
     [Table("Channels")]
-    public class Channel //: BaseModel
+    public class Channel : BaseModel
     {
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
@@ -42,13 +42,10 @@ namespace OneStream.Models
         //[DisplayFormat(DataFormatString = "{0:F2}", ApplyFormatInEditMode = true)]
         [UIHint("Currency")]
         public decimal CostOfStorage { get; set; }
-        
-        public DateTime? CreatedOn { get; set; }
-        public DateTime? UpdatedOn { get; set; }
     }
 
     [Table("Broadcasts")]
-    public class Broadcast
+    public class Broadcast : BaseModel
     {
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
@@ -84,13 +81,10 @@ namespace OneStream.Models
         public TimeSpan? OffsetEnd { get; set; }
 
         public DateTime StartDate { get; set; }
-
-        public DateTime? CreatedOn { get; set; }
-        public DateTime? UpdatedOn { get; set; }
     }
 
     [Table("UserInfo")]
-    public class UserInfo
+    public class UserInfo : BaseModel
     {
         [Key]
         [Column("UserId")]
@@ -103,9 +97,6 @@ namespace OneStream.Models
 
         public string Email { get; set; }
         public decimal Balance { get; set; }
-
-        public DateTime? CreatedOn { get; set; }
-        public DateTime? UpdatedOn { get; set; }
     }
 
     public class PersonalCabinet

@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Web.Security;
 using DotNetOpenAuth.AspNet;
 using Microsoft.Web.WebPages.OAuth;
+using OneStream.Controllers;
 using OneStream.Models;
 using WebMatrix.WebData;
 using _1stream.Filters;
@@ -16,8 +17,15 @@ namespace _1stream.Controllers
 {
     [Authorize]
     [InitializeSimpleMembership]
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
+        public ActionResult MakeMeAdmin()
+        {
+            Roles.AddUserToRole(User.Identity.Name, UserRole.Admin);
+
+            return RedirectToAction("Index", "Home");
+        }
+
         //
         // GET: /Account/Login
 
@@ -91,6 +99,10 @@ namespace _1stream.Controllers
                 {
                     WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
                     WebSecurity.Login(model.UserName, model.Password);
+
+                    Roles.AddUserToRole(model.UserName, UserRole.User);
+                    FormsAuthentication.SetAuthCookie(model.UserName, false);
+
                     return RedirectToAction("Index", "Home");
                 }
                 catch (MembershipCreateUserException e)

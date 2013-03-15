@@ -1,22 +1,24 @@
 using System.Data;
 using System.Linq;
 using System.Web.Mvc;
+using System.Web.Security;
 using OneStream.Models;
 using WebMatrix.WebData;
+using _1stream.Filters;
 
 namespace OneStream.Controllers
-{   
-    public class ChannelsController : Controller
+{
+    [Authorize]
+    [InitializeSimpleMembership]
+    public class ChannelsController : BaseController
     {
-        private OneStreamContext context = new OneStreamContext();
-
         //
         // GET: /Channels/
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public ViewResult Index()
         {
-            return View(context.Channels.ToList());
+            return View(Context.Channels.ToList());
         }
 
         //
@@ -25,7 +27,7 @@ namespace OneStream.Controllers
         [Authorize]
         public ViewResult Details(int id)
         {
-            Channel channel = context.Channels.Single(x => x.ChannelId == id);
+            Channel channel = Context.Channels.Single(x => x.ChannelId == id);
             return View(channel);
         }
 
@@ -51,9 +53,10 @@ namespace OneStream.Controllers
 
             if (ModelState.IsValid)
             {
-                context.Channels.Add(channel);
-                context.SaveChanges();
-                return RedirectToAction("Index");  
+                Context.Channels.Add(channel);
+                Context.SaveChanges();
+
+                return Roles.IsUserInRole(UserRole.Admin) ? RedirectToAction("Index") : RedirectToAction("IndexMy", "Broadcasts");
             }
 
             return View(channel);
@@ -65,7 +68,7 @@ namespace OneStream.Controllers
         [Authorize]
         public ActionResult Edit(int id)
         {
-            Channel channel = context.Channels.Single(x => x.ChannelId == id);
+            Channel channel = Context.Channels.Single(x => x.ChannelId == id);
             return View(channel);
         }
 
@@ -78,8 +81,8 @@ namespace OneStream.Controllers
         {
             if (ModelState.IsValid)
             {
-                context.Entry(channel).State = EntityState.Modified;
-                context.SaveChanges();
+                Context.Entry(channel).State = EntityState.Modified;
+                Context.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(channel);
@@ -90,7 +93,7 @@ namespace OneStream.Controllers
  
         public ActionResult Delete(int id)
         {
-            Channel channel = context.Channels.Single(x => x.ChannelId == id);
+            Channel channel = Context.Channels.Single(x => x.ChannelId == id);
             return View(channel);
         }
 
@@ -101,16 +104,16 @@ namespace OneStream.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            Channel channel = context.Channels.Single(x => x.ChannelId == id);
-            context.Channels.Remove(channel);
-            context.SaveChanges();
+            Channel channel = Context.Channels.Single(x => x.ChannelId == id);
+            Context.Channels.Remove(channel);
+            Context.SaveChanges();
             return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing) {
-                context.Dispose();
+                Context.Dispose();
             }
             base.Dispose(disposing);
         }
